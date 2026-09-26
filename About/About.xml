@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Multiplayer Nice Inventory Tab Patch</name>
+	<author>Keullaeseu</author>
+	<packageId>keullaeseu.multiplayerniceinventorytabpatch</packageId>
+	<modVersion>1.0.0.0</modVersion>
+	<url>https://github.com/Keullaeseu/Multiplayer-Nice-Inventory-Tab-Patch</url>
+	<description>Provides multiplayer support for the Nice Inventory Tab mod by Andromeda.</description>
+
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+
+	<loadAfter>
+		<li>rwmt.Multiplayer</li>
+		<li>Andromeda.NiceInventoryTab</li>
+		<li>Andromeda.NITICE</li>
+	</loadAfter>
+
+	<modDependencies>
+		<li>
+			<packageId>rwmt.Multiplayer</packageId>
+			<displayName>Multiplayer</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2606448745</steamWorkshopUrl>
+			<downloadUrl>https://github.com/rwmt/Multiplayer/releases/latest</downloadUrl>
+		</li>
+		<li>
+			<packageId>Andromeda.NiceInventoryTab</packageId>
+			<displayName>Nice Inventory Tab</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/3609897594</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+</ModMetaData>

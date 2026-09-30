@@ -32,7 +32,11 @@ public partial class NiceInventoryTab
         Pawn targetPawn)
     {
         if (wtable?.billStack == null || recipe == null || appdef == null || targetPawn == null || apparelLayer == null)
+        {
+            Log.Warning(
+                $"{LogPrefix} Create order dropped: tableNull={wtable?.billStack == null} recipeNull={recipe == null} appNull={appdef == null} pawnNull={targetPawn == null} layerNull={apparelLayer == null}");
             return;
+        }
 
         var bill = recipe.MakeNewBill();
         if (bill is Bill_ProductionWithUft uftBill)
@@ -124,7 +128,12 @@ public partial class NiceInventoryTab
     [MpCompatSyncMethod]
     private static void SyncedRemoveToInventory(Pawn pawn, Thing app, bool start)
     {
-        if (pawn?.jobs == null || app == null) return;
+        if (pawn?.jobs == null || app == null)
+        {
+            Log.Warning(
+                $"{LogPrefix} RemoveToInventory order dropped: pawnNull={pawn == null} jobsNull={pawn?.jobs == null} appNull={app == null}");
+            return;
+        }
 
         var job = JobMaker.MakeJob(Assets.NIT_MoveApparelToInventory, app);
         job.playerForced = true;
@@ -139,7 +148,12 @@ public partial class NiceInventoryTab
     [MpCompatSyncMethod]
     private static void SyncedWearFromInventory(Pawn pawn, Thing app)
     {
-        if (pawn?.jobs == null || app == null || pawn.apparel == null) return;
+        if (pawn?.jobs == null || app == null || pawn.apparel == null)
+        {
+            Log.Warning(
+                $"{LogPrefix} WearFromInventory order dropped: pawnNull={pawn == null} jobsNull={pawn?.jobs == null} appNull={app == null} apparelNull={pawn?.apparel == null}");
+            return;
+        }
 
         pawn.jobs.StopAll();
         var wornApparel = pawn.apparel.WornApparel;
@@ -161,7 +175,12 @@ public partial class NiceInventoryTab
     [MpCompatSyncMethod]
     private static void SyncedDrop(Pawn pawn, Thing t)
     {
-        if (pawn?.jobs == null || t == null) return;
+        if (pawn?.jobs == null || t == null)
+        {
+            Log.Warning(
+                $"{LogPrefix} Drop order dropped: pawnNull={pawn == null} jobsNull={pawn?.jobs == null} thingNull={t == null}");
+            return;
+        }
 
         if (t is Apparel apparel && pawn.apparel != null && pawn.apparel.WornApparel.Contains(apparel))
         {
@@ -187,7 +206,12 @@ public partial class NiceInventoryTab
     [MpCompatSyncMethod]
     private static void SyncedEquipWeapon(Pawn pawn, ThingWithComps item)
     {
-        if (pawn?.equipment == null || item == null || pawn.inventory?.innerContainer == null) return;
+        if (pawn?.equipment == null || item == null || pawn.inventory?.innerContainer == null)
+        {
+            Log.Warning(
+                $"{LogPrefix} EquipWeapon order dropped: pawnNull={pawn == null} equipmentNull={pawn?.equipment == null} itemNull={item == null} containerNull={pawn?.inventory?.innerContainer == null}");
+            return;
+        }
 
         var container = pawn.inventory.innerContainer;
         pawn.jobs?.StopAll();
@@ -214,7 +238,12 @@ public partial class NiceInventoryTab
     [MpCompatSyncMethod]
     private static void SyncedMoveWeaponToInventory(Pawn pawn, ThingWithComps item)
     {
-        if (pawn?.equipment?.Primary == null || item == null || pawn.inventory?.innerContainer == null) return;
+        if (pawn?.equipment?.Primary == null || item == null || pawn.inventory?.innerContainer == null)
+        {
+            Log.Warning(
+                $"{LogPrefix} MoveWeaponToInventory order dropped: pawnNull={pawn == null} primaryNull={pawn?.equipment?.Primary == null} itemNull={item == null} containerNull={pawn?.inventory?.innerContainer == null}");
+            return;
+        }
 
         var container = pawn.inventory.innerContainer;
         if (CommandUtility.CanFitInInventory(pawn, pawn.equipment.Primary.def, out _, true))
@@ -236,7 +265,13 @@ public partial class NiceInventoryTab
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void SyncedSetForced(Pawn pawn, Apparel apparel, bool forced)
     {
-        if (pawn?.outfits?.forcedHandler == null || apparel == null) return;
+        if (pawn?.outfits?.forcedHandler == null || apparel == null)
+        {
+            Log.Warning(
+                $"{LogPrefix} SetForced order dropped: pawnNull={pawn == null} handlerNull={pawn?.outfits?.forcedHandler == null} apparelNull={apparel == null}");
+            return;
+        }
+
         pawn.outfits.forcedHandler.SetForced(apparel, forced);
 
         // NIT only rebuilds item rows when worn-list versions change; forcing changes
@@ -252,7 +287,13 @@ public partial class NiceInventoryTab
     [MpCompatSyncMethod]
     private static void SyncedOptimizeWear(Pawn pawn, Thing app)
     {
-        if (pawn?.jobs == null || app == null) return;
+        if (pawn?.jobs == null || app == null)
+        {
+            Log.Warning(
+                $"{LogPrefix} OptimizeWear order dropped: pawnNull={pawn == null} jobsNull={pawn?.jobs == null} appNull={app == null}");
+            return;
+        }
+
         var job = JobMaker.MakeJob(JobDefOf.Wear, app);
         job.playerForced = true;
         pawn.jobs.StartJob(job, JobCondition.InterruptForced, resumeCurJobAfterwards: true);
@@ -263,7 +304,13 @@ public partial class NiceInventoryTab
     [MpCompatSyncMethod]
     private static void SyncedOptimizeDrop(Pawn pawn, Thing app)
     {
-        if (pawn?.jobs == null || app == null) return;
+        if (pawn?.jobs == null || app == null)
+        {
+            Log.Warning(
+                $"{LogPrefix} OptimizeDrop order dropped: pawnNull={pawn == null} jobsNull={pawn?.jobs == null} appNull={app == null}");
+            return;
+        }
+
         var job = JobMaker.MakeJob(JobDefOf.RemoveApparel, app);
         job.playerForced = true;
         pawn.jobs.StartJob(job, JobCondition.InterruptForced, resumeCurJobAfterwards: true);

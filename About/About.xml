@@ -3,7 +3,7 @@
 	<name>Multiplayer Nice Inventory Tab Patch</name>
 	<author>Keullaeseu</author>
 	<packageId>keullaeseu.mp.Andromeda.NiceInventoryTab</packageId>
-	<modVersion>1.0.0.0</modVersion>
+	<modVersion>1.0.0.1</modVersion>
 	<url>https://github.com/Keullaeseu/Multiplayer-Nice-Inventory-Tab-Patch</url>
 	<description>Provides multiplayer support for the Nice Inventory Tab mod by Andromeda.</description>
 

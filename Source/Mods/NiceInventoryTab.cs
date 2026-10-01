@@ -4,8 +4,9 @@ using Verse;
 namespace MultiplayerNiceInventoryTabPatch.Source.Mods;
 
 /// <summary>
-///     Multiplayer patch for Nice Inventory Tab by Andromeda, Last Update: 3 Apr @ 4:19pm 2026
-///     https://steamcommunity.com/sharedfiles/filedetails/?id=3609897594
+///     Multiplayer patch for Nice Inventory Tab by Andromeda,
+///     Last Update: 3 Apr @ 4:19pm 2026
+///     <see href="https://steamcommunity.com/sharedfiles/filedetails/?id=3609897594" />
 ///     Follows the rwmt/Multiplayer-Compatibility pattern (see Multiplayer-Nice-Bill-Tab-Patch):
 ///     UI event handlers are Harmony-prefixed and redirected into [MpCompatSyncMethod]
 ///     workers that only touch game state, so every client executes the same mutation.
